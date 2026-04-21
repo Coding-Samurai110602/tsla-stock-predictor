@@ -1,0 +1,25 @@
+# Sensitive
+.env
+
+# Large data files
+all_musk_posts.csv
+musk_quote_tweets.csv
+df_tsla.csv
+tsla-mlops/app/df_tsla.csv
+tsla-mlops/app/all_musk_posts.csv
+tsla-mlops/app/seed_sentiment.py
+daily_sentiment_tsla.csv
+
+# Model files (too large for GitHub)
+*.pkl
+*.keras
+*.h5
+tsla-mlops/app/models/
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Mac
+.DS_Store

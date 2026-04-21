@@ -19,7 +19,7 @@ RUN pip install --upgrade pip && \
 
 COPY app/ .
 COPY app/models/ ./models/
-COPY app/df_tsla.csv /app/df_tsla.csv
+#COPY app/df_tsla.csv /app/df_tsla.csv
 
 EXPOSE 8000
 

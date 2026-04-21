@@ -58,6 +58,8 @@ FinBERT improves directional accuracy over the baseline by 1.68%, which is the m
 ---
 
 ## Project Structure
+
+```
 tsla-stock-predictor/
 ├── notebooks/
 │   ├── TSLA_Stock_Analysis_LSTM.ipynb    # EDA, feature engineering, model training
@@ -81,6 +83,7 @@ tsla-stock-predictor/
 │   └── db/
 │       └── init.sql
 └── README.md
+```
 
 ---
 

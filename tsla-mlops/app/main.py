@@ -14,6 +14,8 @@ from dotenv import load_dotenv
 from prometheus_fastapi_instrumentator import Instrumentator
 
 from scheduler import start_scheduler, stop_scheduler, run_daily_pipeline
+from data_ingestion import fetch_historical_tsla, store_historical_prices
+import subprocess
 
 load_dotenv()
 logging.basicConfig(level=logging.INFO)
@@ -344,3 +346,19 @@ def get_sentiment_history(days: int = 30):
     except Exception as e:
         logger.error(f"Error fetching sentiment history: {e}")
         raise HTTPException(status_code=500, detail=str(0))
+
+@app.post("/api/admin/seed-prices")
+def seed_prices():
+    df = fetch_historical_tsla()
+    if df is None:
+        raise HTTPException(status_code=500, detail="Failed to load CSV")
+    success = store_historical_prices(df)
+    return {"status": "done", "rows": len(df), "stored": success}
+
+
+@app.post("/api/admin/seed-sentiment")
+def seed_sentiment_bg(background_tasks: BackgroundTasks):
+    def run_seed():
+        subprocess.run(["python3", "/app/seed_sentiment.py"])
+    background_tasks.add_task(run_seed)
+    return {"status": "started", "note": "Sentiment seeding running in background, takes ~30 min"}

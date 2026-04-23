@@ -106,9 +106,9 @@
                 <div class="card-header">
                     <h2>TSLA Price History</h2>
                     <div class="chart-controls">
-                        <button class="chart-btn active" onclick="loadPriceChart(30)">1M</button>
-                        <button class="chart-btn" onclick="loadPriceChart(90)">3M</button>
-                        <button class="chart-btn" onclick="loadPriceChart(180)">6M</button>
+                        <button class="chart-btn active" onclick="loadPriceChart(30, this)">1M</button>
+                        <button class="chart-btn" onclick="loadPriceChart(90, this)">3M</button>
+                        <button class="chart-btn" onclick="loadPriceChart(180, this)">6M</button>
                     </div>
                 </div>
                 <canvas id="priceChart"></canvas>

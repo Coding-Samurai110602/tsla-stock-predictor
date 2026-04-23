@@ -184,13 +184,12 @@ async function loadPredictionHistory() {
 }
 
 // ─── Price Chart ──────────────────────────────────────────────────────────────
-async function loadPriceChart(days = 30) {
+async function loadPriceChart(days = 30, targetBtn = null) {
     try {
-        // Update active button
         document.querySelectorAll('.chart-btn').forEach(btn => {
             btn.classList.remove('active');
         });
-        if (event?.target) event.target.classList.add('active');
+        if (targetBtn) targetBtn.classList.add('active');
 
         const res = await fetch(`${API_BASE}/api/price/history?days=${days}`);
         if (!res.ok) throw new Error('No price data');

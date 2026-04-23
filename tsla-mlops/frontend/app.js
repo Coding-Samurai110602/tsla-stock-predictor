@@ -190,7 +190,7 @@ async function loadPriceChart(days = 30) {
         document.querySelectorAll('.chart-btn').forEach(btn => {
             btn.classList.remove('active');
         });
-        event?.target?.classList.add('active');
+        if (event?.target) event.target.classList.add('active');
 
         const res = await fetch(`${API_BASE}/api/price/history?days=${days}`);
         if (!res.ok) throw new Error('No price data');

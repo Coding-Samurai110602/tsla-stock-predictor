@@ -5,7 +5,8 @@ WORKDIR /app
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
-    PYTHONPATH=/app
+    PYTHONPATH=/app \
+    GIT_PYTHON_REFRESH=quiet
 
 RUN apt-get update && apt-get install -y \
     build-essential \
@@ -19,13 +20,11 @@ RUN pip install --upgrade pip && \
 
 COPY app/ .
 COPY app/models/ ./models/
-#COPY app/df_tsla.csv /app/df_tsla.csv
+COPY frontend/ ./frontend/
 
 EXPOSE 8000
 
 HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
     CMD curl -f http://localhost:8000/health || exit 1
 
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
-
-ENV GIT_PYTHON_REFRESH=quiet
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

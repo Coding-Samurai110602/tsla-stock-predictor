@@ -1,5 +1,5 @@
 // ─── Config ──────────────────────────────────────────────────────────────────
-const API_BASE = 'http://localhost:8000';
+const API_BASE = 'https://tsla-stock-predictor-production.up.railway.app';
 let priceChart = null;
 
 // ─── Utility Functions ────────────────────────────────────────────────────────

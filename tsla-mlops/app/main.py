@@ -23,10 +23,15 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 #Redis client
-redis_client = redis.Redis(
-    host=os.getenv('REDIS_HOST', 'localhost'),
-    port=int(os.getenv('REDIS_PORT', 6379)),
-    decode_responses=True
+_redis_url = os.getenv('REDIS_URL')
+redis_client = (
+    redis.from_url(_redis_url, decode_responses=True)
+    if _redis_url
+    else redis.Redis(
+        host=os.getenv('REDIS_HOST', 'localhost'),
+        port=int(os.getenv('REDIS_PORT', 6379)),
+        decode_responses=True
+    )
 )
 
 # --- DATABASE ---

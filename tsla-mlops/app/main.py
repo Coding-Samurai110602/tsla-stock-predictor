@@ -78,10 +78,12 @@ app.add_middleware(
 async def add_csp_header(request, call_next):
     response = await call_next(request)
     response.headers["Content-Security-Policy"] = (
-        "default-src 'self'; "
-        "script-src 'self' 'unsafe-eval' cdn.jsdelivr.net; "
-        "style-src 'self' 'unsafe-inline'; "
-        "img-src 'self' data:;"
+        "default-src 'self' cdn.jsdelivr.net; "
+        "script-src 'self' 'unsafe-eval' 'unsafe-inline' cdn.jsdelivr.net; "
+        "style-src 'self' 'unsafe-inline' cdn.jsdelivr.net; "
+        "connect-src 'self' https://tsla-stock-predictor-production.up.railway.app; "
+        "img-src 'self' data:; "
+        "font-src 'self' cdn.jsdelivr.net;"
     )
     return response
 
